@@ -2348,7 +2348,8 @@
         "note": "出現確率は公式には公表されていない（％は出典の解析記事の値）",
         "coins": [
           { "coin": "5つ星コイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
-          { "coin": "スペシャルコイン", "rate": 7, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
+          { "coin": "スペシャルコイン", "rate": 7, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
+          { "coin": "福ガシャコイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
         ],
         "era": null
       }
@@ -4461,7 +4462,10 @@
         "method": "gasha",
         "versions": ["ganso", "honke", "shinuchi"],
         "note": "出現確率は公表されていない",
-        "coins": [{ "coin": "鬼ガシャ（妖怪ウォッチバスターズ）", "rate": null, "rateSource": "" }],
+        "coins": [
+          { "coin": "鬼ガシャ（妖怪ウォッチバスターズ）", "rate": null, "rateSource": "" },
+          { "coin": "福ガシャコイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
+        ],
         "era": null
       }
     ],
@@ -4483,7 +4487,8 @@
       "https://game8.jp/youkai-watch2/491365",
       "https://wikiwiki.jp/2ganso-honke/フシギ族",
       "https://enjoi7.sakura.ne.jp/youkai-wach2/youkai_list.html",
-      "https://game8.jp/youkai-watch2/504902"
+      "https://game8.jp/youkai-watch2/504902",
+      "https://note.com/isakaakasi/n/n10bcbf233156"
     ],
     "verified": true,
     "conflicts": [
@@ -5616,7 +5621,8 @@
         "coins": [
           { "coin": "5つ星コイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
           { "coin": "スペシャルコイン", "rate": 7, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
-          { "coin": "うきうきコイン", "rate": 30, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
+          { "coin": "うきうきコイン", "rate": 30, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
+          { "coin": "福ガシャコイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
         ],
         "era": null
       }
@@ -8042,7 +8048,8 @@
           { "coin": "きらきらコイン", "rate": 10, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
           { "coin": "5つ星コイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
           { "coin": "スペシャルコイン", "rate": 7, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
-          { "coin": "あやかしコイン（鹿）", "rate": 5, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
+          { "coin": "あやかしコイン（鹿）", "rate": 5, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
+          { "coin": "福ガシャコイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
         ],
         "era": null
       }
@@ -9132,7 +9139,10 @@
         "method": "gasha",
         "versions": ["ganso", "honke", "shinuchi"],
         "note": "出現確率は公表されていない",
-        "coins": [{ "coin": "鬼ガシャ（妖怪ウォッチバスターズ）", "rate": null, "rateSource": "" }],
+        "coins": [
+          { "coin": "鬼ガシャ（妖怪ウォッチバスターズ）", "rate": null, "rateSource": "" },
+          { "coin": "福ガシャコイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
+        ],
         "era": null
       }
     ],
@@ -9154,7 +9164,8 @@
       "https://game8.jp/youkai-watch2/491365",
       "https://wikiwiki.jp/2ganso-honke/プリチー族",
       "https://enjoi7.sakura.ne.jp/youkai-wach2/youkai_list.html",
-      "https://game8.jp/youkai-watch2/504902"
+      "https://game8.jp/youkai-watch2/504902",
+      "https://note.com/isakaakasi/n/n10bcbf233156"
     ],
     "verified": true,
     "conflicts": []
@@ -10482,7 +10493,8 @@
         "note": "出現確率は公式には公表されていない（％は出典の解析記事の値）",
         "coins": [
           { "coin": "5つ星コイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
-          { "coin": "スペシャルコイン", "rate": 7, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
+          { "coin": "スペシャルコイン", "rate": 7, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
+          { "coin": "福ガシャコイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
         ],
         "era": null
       }
@@ -14036,7 +14048,8 @@
         "note": "出現確率は公式には公表されていない（％は出典の解析記事の値）",
         "coins": [
           { "coin": "5つ星コイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
-          { "coin": "スペシャルコイン", "rate": 7, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
+          { "coin": "スペシャルコイン", "rate": 7, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
+          { "coin": "福ガシャコイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
         ],
         "era": null
       }
@@ -16788,6 +16801,13 @@
         "time": null,
         "weather": null,
         "note": "8000m以上"
+      },
+      {
+        "method": "gasha",
+        "versions": ["ganso", "honke", "shinuchi"],
+        "note": "出現確率は公式には公表されていない（％は出典の解析記事の値）",
+        "coins": [{ "coin": "福ガシャコイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }],
+        "era": null
       }
     ],
     "legendUnlock": [],
@@ -16808,7 +16828,8 @@
       "https://game8.jp/youkai-watch2/491365",
       "https://wikiwiki.jp/2ganso-honke/ウスラカゲ族",
       "https://enjoi7.sakura.ne.jp/youkai-wach2/youkai_list.html",
-      "https://game8.jp/youkai-watch2/504902"
+      "https://game8.jp/youkai-watch2/504902",
+      "https://note.com/isakaakasi/n/n10bcbf233156"
     ],
     "verified": true,
     "conflicts": []
@@ -19545,7 +19566,8 @@
           { "coin": "きらきらコイン", "rate": 10, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
           { "coin": "5つ星コイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
           { "coin": "スペシャルコイン", "rate": 7, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
-          { "coin": "あやかしコイン（猪）", "rate": 5, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
+          { "coin": "あやかしコイン（猪）", "rate": 5, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
+          { "coin": "福ガシャコイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
         ],
         "era": null
       }
@@ -22090,7 +22112,8 @@
         "coins": [
           { "coin": "きらきらコイン", "rate": 40, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
           { "coin": "5つ星コイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
-          { "coin": "スペシャルコイン", "rate": 7, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
+          { "coin": "スペシャルコイン", "rate": 7, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" },
+          { "coin": "福ガシャコイン", "rate": 4, "rateSource": "https://note.com/isakaakasi/n/n10bcbf233156" }
         ],
         "era": null
       }
