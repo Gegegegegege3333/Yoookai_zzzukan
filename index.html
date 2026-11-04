@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16171c" media="(prefers-color-scheme: dark)">
+<title>妖怪ウォッチ2 図鑑チェッカー</title>
+<meta name="description" content="妖怪ウォッチ2（元祖・本家・真打）の非公式の個人用ファンツール">
+<meta name="apple-mobile-web-app-title" content="妖怪図鑑">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="title" href="#/">妖怪ウォッチ2 図鑑</a>
+    <a class="progress" id="progress" href="#/progress" aria-live="polite" aria-label="進捗を見る">
+      <div class="progress-text"><b id="progCount">0</b> / <span id="progTotal">0</span><span class="pct" id="progPct">0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="progFill"></div></div>
+    </a>
+  </div>
+</header>
+
+<main>
+  <section id="listView" class="view" hidden>
+    <section class="pinned" id="pinned" hidden></section>
+    <div class="finder">
+      <div class="finder-row">
+        <input class="search" id="search" type="search" placeholder="名前・読み・番号で探す" autocomplete="off" enterkeyhint="search" aria-label="名前・読み・番号で探す">
+        <button class="btn filter-toggle" id="filterToggle" type="button" aria-expanded="false" aria-controls="filterPanel">絞り込み<span class="fcount num" id="filterCount" hidden></span></button>
+      </div>
+      <div class="filter-panel" id="filterPanel" hidden></div>
+      <div class="result-line" id="resultLine" hidden></div>
+    </div>
+    <div id="list"></div>
+    <div class="empty" id="emptyList" hidden>
+      <p>条件に合う妖怪はいません。</p>
+      <button type="button" class="btn" data-filter-reset>条件をすべて解除</button>
+    </div>
+  </section>
+
+  <section id="detailView" class="view" hidden></section>
+  <section id="lookupView" class="view" hidden></section>
+  <section id="progressView" class="view" hidden></section>
+  <section id="settingsView" class="view" hidden></section>
+
+  <section id="loadError" class="view" hidden>
+    <p class="error">妖怪データを読み込めませんでした。ページを開き直してください。</p>
+  </section>
+</main>
+
+<nav class="tabbar" aria-label="画面の切り替え">
+  <div class="tabbar-inner">
+    <a class="tab" href="#/" data-tab="list">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>一覧
+    </a>
+    <a class="tab" href="#/lookup" data-tab="lookup">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>逆引き
+    </a>
+    <a class="tab" href="#/progress" data-tab="progress">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V12M12 20V5M19 20v-5"/></svg>進捗
+    </a>
+    <a class="tab" href="#/settings" data-tab="settings">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg>設定
+    </a>
+  </div>
+</nav>
+
+<div class="toast" id="toast" role="status" hidden>
+  <span class="toast-text" id="toastText"></span>
+  <button class="toast-undo" id="toastUndo" type="button">元に戻す</button>
+</div>
+
+<dialog class="confirm" id="confirmClear" aria-labelledby="confirmTitle">
+  <form method="dialog">
+    <h2 id="confirmTitle">チェックをすべて消しますか？</h2>
+    <p id="confirmText"></p>
+    <div class="confirm-buttons">
+      <button class="btn" value="cancel" type="submit" autofocus>やめる</button>
+      <button class="btn danger" value="ok" type="submit">すべて消す</button>
+    </div>
+  </form>
+</dialog>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

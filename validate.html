@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>データの自動チェック</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 16px; line-height: 1.6; background: Canvas; color: CanvasText; }
+  h1 { font-size: 18px; }
+  .err { color: #d33; } .warn { color: #b80; }
+  li { margin: 2px 0; }
+</style>
+</head>
+<body>
+<h1>妖怪データの自動チェック</h1>
+<p><label><input type="checkbox" id="sample" checked> サンプルモード（欠番・特殊入手妖怪の未収録を「注意」にする）</label></p>
+<div id="out">チェック中…</div>
+<script type="module">
+  import { validate } from './js/validate.js';
+  const data = await (await fetch('data/yokai.json', { cache: 'no-cache' })).json();
+  const run = () => {
+    const r = validate(data, { sample: document.getElementById('sample').checked });
+    const li = (c, t) => `<li class="${c}">${t.replace(/[&<>]/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[s])}</li>`;
+    document.getElementById('out').innerHTML =
+      `<p><b>${r.count} 体</b>：エラー <b class="err">${r.errors.length}</b> 件 / 注意 <b class="warn">${r.warnings.length}</b> 件</p>` +
+      `<ul>${r.errors.map(e => li('err', 'エラー: ' + e)).join('')}${r.warnings.map(w => li('warn', '注意: ' + w)).join('')}</ul>`;
+  };
+  document.getElementById('sample').addEventListener('change', run);
+  run();
+</script>
+</body>
+</html>

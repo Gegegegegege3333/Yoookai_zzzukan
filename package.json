@@ -1,0 +1,9 @@
+{
+  "name": "yokai-watch2-zukan",
+  "private": true,
+  "type": "module",
+  "description": "妖怪ウォッチ2（元祖・本家・真打）の妖怪図鑑チェッカー（非公式の個人用ツール）",
+  "scripts": {
+    "validate": "node scripts/validate.mjs"
+  }
+}

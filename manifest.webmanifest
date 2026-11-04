@@ -1,0 +1,15 @@
+{
+  "name": "妖怪ウォッチ2 図鑑チェッカー",
+  "short_name": "妖怪図鑑",
+  "description": "妖怪ウォッチ2（元祖・本家・真打）の仲間になる妖怪を調べて、捕まえた妖怪をチェックする非公式の個人用ファンツール",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f4ef",
+  "theme_color": "#d9482b",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

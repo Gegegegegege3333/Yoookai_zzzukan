@@ -1,0 +1,12 @@
+# 手元だけに置くもの（公開しない）
+docs/spec.md
+docs/data-report.md
+
+# 攻略サイトから集めたページのキャッシュ（再配布しない）
+yw2-cache/
+
+# エディタ・OS のファイル
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
