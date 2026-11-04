@@ -288,8 +288,8 @@ function renderDetail(id) {
 
   view.innerHTML = `
     <div class="detail-nav">
-      <a class="btn back" href="#/">← 一覧へ</a>
       <a class="btn${prev ? '' : ' disabled'}" href="${prev ? '#/yokai/' + esc(prev.id) : '#/'}" aria-label="前の妖怪">‹ 前</a>
+      <a class="btn back" href="#/">一覧へ</a>
       <a class="btn${next ? '' : ' disabled'}" href="${next ? '#/yokai/' + esc(next.id) : '#/'}" aria-label="次の妖怪">次 ›</a>
     </div>
     <div class="hero${on ? ' caught' : ''}" data-id="${esc(y.id)}">
@@ -319,10 +319,8 @@ function renderDetail(id) {
 function secBasic(y) {
   return `<section class="sec"><h3>基本情報</h3><dl class="kv">
     <dt>名前</dt><dd>${esc(y.name)}</dd>
-    <dt>読み</dt><dd>${esc(orUnknown(y.kana))}</dd>
     <dt>種族</dt><dd>${esc(y.tribe)}</dd>
     <dt>ランク</dt><dd>${esc(y.rank)}</dd>
-    <dt>レジェンド</dt><dd>${y.isLegend ? 'レジェンド妖怪' : 'ちがう'}</dd>
     <dt>バージョン</dt><dd>${esc(versionsText(y.versions))}で仲間にできる</dd>
   </dl></section>`;
 }

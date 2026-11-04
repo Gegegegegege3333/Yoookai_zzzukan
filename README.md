@@ -46,6 +46,7 @@ java scripts/build/Build.java ../yw2-cache
 | [enjoi 妖怪ウォッチ2攻略](https://enjoi7.sakura.ne.jp/youkai-wach2/youkai_list.html) | 名前・ランク・好物・出現場所（バージョン限定の印）、進化・合成、ガシャの現代/過去、限定妖怪、怪魔、レジェンド |
 | [元祖・本家 Wiki*](https://wikiwiki.jp/2ganso-honke/) | 名前・ランク・種族、レジェンドの解除条件 |
 | [Game8](https://game8.jp/youkai-watch2/491365) | 名前・ランク・好物、魂の効果、合成レシピ |
+| [note「妖怪ウォッチ2のガチャシステムとテーブル」](https://note.com/isakaakasi/n/n10bcbf233156) | ガシャのコインごとの出現確率（`scripts/data/gasha-rates.json`）。gamepedia にないコインの組み合わせと、色コインの現代/過去もこちらに合わせた。鬼ガシャ・エラベール・ゲームコインは載っていないので「不明」 |
 
 名前・ランク・好物は出典の多数決で決め、割れたものは `conflicts` に残す（`resolved: false` がユーザーに確認したいもの）。
 

@@ -218,7 +218,7 @@ main { max-width: 720px; margin: 0 auto; padding: 0 12px calc(var(--tabbar-h) + 
 }
 .btn:active { background: var(--surface2); }
 .btn.disabled { opacity: .35; pointer-events: none; }
-.detail-nav .back { margin-right: auto; }
+.detail-nav .back { flex: 1; }
 
 .hero {
   background: var(--surface); border: 1px solid var(--line); border-radius: 16px;

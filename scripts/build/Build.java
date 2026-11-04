@@ -79,6 +79,7 @@ public class Build {
     buildEvolution();
     buildFusion();
     buildObtain();
+    applyGashaRates();
     finish();
 
     List<Object> out = new ArrayList<>();
@@ -941,6 +942,93 @@ public class Build {
     return o;
   }
 
+  // ================= ガシャの確率 =================
+  // scripts/data/gasha-rates.json の値を入れる。記事にあって図鑑のガシャにないもの・その逆はレポートに出す
+  static final List<String> rateNotes = new ArrayList<>();
+
+  static void applyGashaRates() throws Exception {
+    Path f = ROOT.resolve("scripts/data/gasha-rates.json");
+    if (!Files.exists(f)) return;
+    Map<String, Object> top = map(Json.parse(Files.readString(f)));
+    String src = str(top.get("source"));
+    // コイン → 時代（present / past / all）→ 妖怪の id → 確率
+    Map<String, Map<String, Map<String, Object>>> rates = new LinkedHashMap<>();
+    for (var ce : map(top.get("coins")).entrySet()) {
+      Map<String, Map<String, Object>> byEra = new LinkedHashMap<>();
+      for (var ee : map(ce.getValue()).entrySet()) {
+        Map<String, Object> ids = new LinkedHashMap<>();
+        for (var ye : map(ee.getValue()).entrySet()) {
+          Y y = find(ye.getKey());
+          if (y == null) rateNotes.add(ce.getKey() + ": 記事の「" + ye.getKey() + "」が図鑑の妖怪と結びつかない");
+          else ids.put(y.id, ye.getValue());
+        }
+        byEra.put(ee.getKey(), ids);
+      }
+      rates.put(ce.getKey(), byEra);
+    }
+    Set<String> used = new HashSet<>(); // 「コイン|時代|id」
+    for (Y y : byNo.values()) for (Map<String, Object> o : y.obtain) {
+      if (!"gasha".equals(o.get("method"))) continue;
+      String era = str(o.get("era"));
+      boolean any = false;
+      for (Object co : list(o.get("coins"))) {
+        Map<String, Object> c = map(co);
+        var byEra = rates.get(str(c.get("coin")));
+        if (byEra == null) continue; // 記事にないコイン（鬼ガシャ・エラベールなど）は「不明」のまま
+        Object rate = null;
+        for (String k : era.isEmpty() ? List.of("all", "present", "past") : List.of(era, "all")) {
+          rate = byEra.getOrDefault(k, Map.of()).get(y.id);
+          if (rate != null) { used.add(c.get("coin") + "|" + k + "|" + y.id); break; }
+        }
+        // 色コインの現代・過去は enjoi の表の色から決めていたので、記事と逆なら記事に合わせる
+        String other = era.equals("present") ? "past" : era.equals("past") ? "present" : null;
+        if (rate == null && other != null && list(o.get("coins")).size() == 1 && byEra.getOrDefault(other, Map.of()).get(y.id) != null) {
+          rate = byEra.get(other).get(y.id);
+          used.add(c.get("coin") + "|" + other + "|" + y.id);
+          o.put("era", other);
+          o.put("note", str(o.get("note")).replace(era.equals("past") ? "過去" : "現代", other.equals("past") ? "過去" : "現代"));
+          rateNotes.add(y.name + "（No." + y.no + "）: " + c.get("coin") + " の時代を記事に合わせた（enjoi の表の色: " + eraJa(era) + " → 記事: " + eraJa(other) + "）");
+        }
+        if (rate == null) { rateNotes.add(y.name + "（No." + y.no + "）: " + c.get("coin") + (era.isEmpty() ? "" : "（" + eraJa(era) + "）") + " で出ることになっているが、記事に確率がない"); continue; }
+        c.put("rate", rate);
+        c.put("rateSource", src);
+        any = true;
+      }
+      if (any) {
+        o.put("note", str(o.get("note")).replace("出現確率は公表されていない", "出現確率は公式には公表されていない（％は出典の解析記事の値）"));
+        y.sources.add(src);
+      }
+    }
+    // 記事にあって図鑑のガシャにないものは、入手方法に足す（gamepedia のコインの一覧に載っていない組み合わせ）
+    for (var ce : rates.entrySet()) for (var ee : ce.getValue().entrySet()) for (var ie : ee.getValue().entrySet()) {
+      String coin = ce.getKey(), era = ee.getKey(), id = ie.getKey();
+      if (used.contains(coin + "|" + era + "|" + id)) continue;
+      Y y = byId(id);
+      // 色コインは時代ごとの入手方法に、それ以外は時代の区別のない入手方法に入れる
+      String key = COLOR_COINS.contains(coin) ? era : "";
+      Map<String, Object> o = y.obtain.stream().filter(x -> "gasha".equals(x.get("method")) && str(x.get("era")).equals(key)).findFirst().orElse(null);
+      if (o == null) {
+        o = obtain(y, "gasha", (key.isEmpty() ? "" : eraJa(key) + "の妖怪ガシャ。") + "出現確率は公式には公表されていない（％は出典の解析記事の値）");
+        o.put("coins", new ArrayList<>());
+        o.put("era", key.isEmpty() ? null : key);
+        y.obtain.add(o);
+      }
+      Map<String, Object> cm = new LinkedHashMap<>();
+      cm.put("coin", coin);
+      cm.put("rate", ie.getValue());
+      cm.put("rateSource", src);
+      @SuppressWarnings("unchecked") List<Object> cs = (List<Object>) o.get("coins");
+      cs.add(cm);
+      y.sources.add(src);
+      rateNotes.add(y.name + "（No." + y.no + "）: " + coin + (era.equals("all") ? "" : "（" + eraJa(era) + "）") + " は記事にだけあるので、入手方法に足した");
+    }
+    // 野生 → その他の順を保つ
+    List<String> order = List.of("wild", "evolve", "fusion", "gasha", "quest", "boss", "legend", "qr", "password", "trade", "other");
+    for (Y y : byNo.values()) y.obtain.sort(Comparator.comparingInt(o -> order.indexOf(str(o.get("method")))));
+  }
+
+  static String eraJa(String era) { return era.equals("past") ? "過去" : "現代"; }
+
   // ================= 仕上げ =================
 
   static void finish() {
@@ -1032,7 +1120,8 @@ public class Build {
     b.append("- 技・スキル: gamepedia のみ。ただし ").append(all.stream().filter(y -> y.movesChecked).count())
      .append(" 体（レジェンド・怪魔・特別な妖怪など）は enjoi の技の表と名前を比べた\n");
     b.append("- 魂の効果: すべて Game8 の魂一覧のみ\n");
-    b.append("- ガシャのコイン: gamepedia のみ（現代・過去の区別は enjoi のガシャ表の色から）。出現確率はどこにも載っていないので、すべて「不明」\n");
+    b.append("- ガシャのコイン: gamepedia のみ（現代・過去の区別は enjoi のガシャ表の色から）\n");
+    b.append("- ガシャの出現確率: 公式には公表されていない。scripts/data/gasha-rates.json（解析記事の値）だけ。記事にない組み合わせは「不明」\n");
     Map<String, List<String>> single = new TreeMap<>();
     for (Y y : all) for (String f : new LinkedHashSet<>(y.singleSource)) single.computeIfAbsent(f, k -> new ArrayList<>()).add(y.name);
     for (var e : single.entrySet()) b.append("- ").append(e.getKey()).append("（").append(e.getValue().size()).append(" 体）: ")
@@ -1041,6 +1130,9 @@ public class Build {
     b.append("\n## 名前を特定できなかったもの\n\n");
     if (unresolved.isEmpty()) b.append("なし\n");
     for (String u : new LinkedHashSet<>(unresolved)) b.append("- ").append(u).append('\n');
+    b.append("\n## ガシャの確率で合わなかったもの\n\n");
+    if (rateNotes.isEmpty()) b.append("なし\n");
+    for (String n : rateNotes) b.append("- ").append(n).append('\n');
     b.append("\n## メモ\n\n");
     if (notes.isEmpty()) b.append("なし\n");
     for (String n : notes) b.append("- ").append(n).append('\n');
